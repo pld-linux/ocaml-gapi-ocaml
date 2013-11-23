@@ -2,7 +2,7 @@
 # Conditional build:
 %bcond_without	opt		# build opt
 
-%define		pkgname	gapi
+%define		pkgname	gapi-ocaml
 %define		debug_package	%{nil}
 Summary:	Google Data Protocol (GData) client library
 Name:		ocaml-%{pkgname}
@@ -10,7 +10,7 @@ Version:	0.2.1
 Release:	1
 License:	MIT
 Group:		Libraries
-Source0:	https://forge.ocamlcore.org/frs/download.php/1274/gapi-ocaml-%{version}.tar.gz
+Source0:	https://forge.ocamlcore.org/frs/download.php/1274/%{pkgname}-%{version}.tar.gz
 # Source0-md5:	c87aa3b2c9afef190307d8da51d65875
 URL:		http://gapi-ocaml.forge.ocamlcore.org/
 BuildRequires:	cppo >= 0.9.3
@@ -53,7 +53,7 @@ Pakiet ten zawiera pliki niezbędne do tworzenia programów używających
 tej biblioteki.
 
 %prep
-%setup -q -n gapi-ocaml-%{version}
+%setup -q -n %{pkgname}-%{version}
 
 %build
 ocaml setup.ml -configure \
@@ -67,15 +67,15 @@ install -d $OCAMLFIND_DESTDIR
 ocaml setup.ml -install
 
 # move to dir pld ocamlfind looks
-install -d $RPM_BUILD_ROOT%{_libdir}/ocaml/site-lib/gapi-ocaml
-mv $OCAMLFIND_DESTDIR/gapi-ocaml/META \
-	$RPM_BUILD_ROOT%{_libdir}/ocaml/site-lib/gapi-ocaml
-cat <<EOF >> $RPM_BUILD_ROOT%{_libdir}/ocaml/site-lib/gapi-ocaml/META
-directory="+gapi-ocaml"
+install -d $RPM_BUILD_ROOT%{_libdir}/ocaml/site-lib/%{pkgname}
+mv $OCAMLFIND_DESTDIR/%{pkgname}/META \
+	$RPM_BUILD_ROOT%{_libdir}/ocaml/site-lib/%{pkgname}
+cat <<EOF >> $RPM_BUILD_ROOT%{_libdir}/ocaml/site-lib/%{pkgname}/META
+directory="+%{pkgname}"
 EOF
 
 # no standard way of packaging .mli docs in pld. just drop
-%{__rm} $RPM_BUILD_ROOT%{_libdir}/ocaml/gapi-ocaml/*.mli
+%{__rm} $RPM_BUILD_ROOT%{_libdir}/ocaml/%{pkgname}/*.mli
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -83,8 +83,8 @@ rm -rf $RPM_BUILD_ROOT
 %files devel
 %defattr(644,root,root,755)
 %doc LICENSE
-%dir %{_libdir}/ocaml/gapi-ocaml
-%{_libdir}/ocaml/gapi-ocaml/*.a
-%{_libdir}/ocaml/gapi-ocaml/*.cm[ixa]*
-%dir %{_libdir}/ocaml/site-lib/gapi-ocaml
-%{_libdir}/ocaml/site-lib/gapi-ocaml/META
+%dir %{_libdir}/ocaml/%{pkgname}
+%{_libdir}/ocaml/%{pkgname}/*.a
+%{_libdir}/ocaml/%{pkgname}/*.cm[ixa]*
+%dir %{_libdir}/ocaml/site-lib/%{pkgname}
+%{_libdir}/ocaml/site-lib/%{pkgname}/META
