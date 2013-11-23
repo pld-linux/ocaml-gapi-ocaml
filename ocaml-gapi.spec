@@ -66,6 +66,14 @@ export OCAMLFIND_DESTDIR=$RPM_BUILD_ROOT%{_libdir}/ocaml
 install -d $OCAMLFIND_DESTDIR
 ocaml setup.ml -install
 
+# move to dir pld ocamlfind looks
+install -d $RPM_BUILD_ROOT%{_libdir}/ocaml/site-lib/gapi-ocaml
+mv $OCAMLFIND_DESTDIR/gapi-ocaml/META \
+	$RPM_BUILD_ROOT%{_libdir}/ocaml/site-lib/gapi-ocaml
+cat <<EOF >> $RPM_BUILD_ROOT%{_libdir}/ocaml/site-lib/gapi-ocaml/META
+directory="+gapi-ocaml"
+EOF
+
 # no standard way of packaging .mli docs in pld. just drop
 %{__rm} $RPM_BUILD_ROOT%{_libdir}/ocaml/gapi-ocaml/*.mli
 
@@ -76,6 +84,7 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %doc LICENSE
 %dir %{_libdir}/ocaml/gapi-ocaml
-%{_libdir}/ocaml/gapi-ocaml/META
 %{_libdir}/ocaml/gapi-ocaml/*.a
 %{_libdir}/ocaml/gapi-ocaml/*.cm[ixa]*
+%dir %{_libdir}/ocaml/site-lib/gapi-ocaml
+%{_libdir}/ocaml/site-lib/gapi-ocaml/META
