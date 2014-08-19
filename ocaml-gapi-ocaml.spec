@@ -7,7 +7,7 @@
 Summary:	Google Data Protocol (GData) client library
 Name:		ocaml-%{pkgname}
 Version:	0.2.1
-Release:	1
+Release:	2
 License:	MIT
 Group:		Libraries
 Source0:	https://forge.ocamlcore.org/frs/download.php/1274/%{pkgname}-%{version}.tar.gz
@@ -17,7 +17,7 @@ BuildRequires:	cppo >= 0.9.3
 BuildRequires:	ocaml >= 3.04-7
 BuildRequires:	ocaml-biniou-devel >= 1.0.6
 BuildRequires:	ocaml-cryptokit-devel >= 1.9
-BuildRequires:	ocaml-curl >= 0.6.0
+BuildRequires:	ocaml-curl-devel >= 0.6.0
 BuildRequires:	ocaml-easy-format-devel >= 1.0.1
 BuildRequires:	ocaml-extlib-devel >= 1.5.4
 BuildRequires:	ocaml-findlib >= 1.4
