@@ -6,12 +6,12 @@
 %define		debug_package	%{nil}
 Summary:	Google Data Protocol (GData) client library
 Name:		ocaml-%{pkgname}
-Version:	0.2.1
-Release:	3
+Version:	0.2.3
+Release:	1
 License:	MIT
 Group:		Libraries
-Source0:	https://forge.ocamlcore.org/frs/download.php/1274/%{pkgname}-%{version}.tar.gz
-# Source0-md5:	c87aa3b2c9afef190307d8da51d65875
+Source0:	https://forge.ocamlcore.org/frs/download.php/1445/%{pkgname}-%{version}.tar.gz
+# Source0-md5:	a42aec2eb734f16af7c12261b86eaea4
 URL:		http://gapi-ocaml.forge.ocamlcore.org/
 BuildRequires:	cppo >= 0.9.3
 BuildRequires:	ocaml >= 3.04-7
