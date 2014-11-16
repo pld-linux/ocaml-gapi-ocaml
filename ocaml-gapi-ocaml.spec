@@ -6,8 +6,8 @@
 %define		debug_package	%{nil}
 Summary:	Google Data Protocol (GData) client library
 Name:		ocaml-%{pkgname}
-Version:	0.2.4
-Release:	2
+Version:	0.2.6
+Release:	1
 License:	MIT
 Group:		Libraries
 Source0:	https://forge.ocamlcore.org/frs/download.php/1448/%{pkgname}-%{version}.tar.gz
