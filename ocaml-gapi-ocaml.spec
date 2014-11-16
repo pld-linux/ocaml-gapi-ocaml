@@ -10,8 +10,8 @@ Version:	0.2.6
 Release:	1
 License:	MIT
 Group:		Libraries
-Source0:	https://forge.ocamlcore.org/frs/download.php/1448/%{pkgname}-%{version}.tar.gz
-# Source0-md5:	6396613e70d8c768e81295ed677cc204
+Source0:	https://forge.ocamlcore.org/frs/download.php/1468/%{pkgname}-%{version}.tar.gz
+# Source0-md5:	e158c98587681652decdff6302e423b7
 URL:		http://gapi-ocaml.forge.ocamlcore.org/
 BuildRequires:	cppo >= 0.9.3
 BuildRequires:	ocaml >= 3.04-7
