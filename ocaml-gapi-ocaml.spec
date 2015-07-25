@@ -1,13 +1,18 @@
 #
 # Conditional build:
-%bcond_without	opt		# build opt
+%bcond_without	ocaml_opt	# skip building native optimized binaries (bytecode is always built)
+
+# not yet available on x32 (ocaml 4.02.1), remove when upstream will support it
+%ifnarch %{ix86} %{x8664} arm aarch64 ppc sparc sparcv9
+%undefine	with_ocaml_opt
+%endif
 
 %define		pkgname	gapi-ocaml
 %define		debug_package	%{nil}
 Summary:	Google Data Protocol (GData) client library
 Name:		ocaml-%{pkgname}
 Version:	0.2.6
-Release:	1
+Release:	2
 License:	MIT
 Group:		Libraries
 Source0:	https://forge.ocamlcore.org/frs/download.php/1468/%{pkgname}-%{version}.tar.gz
@@ -93,7 +98,11 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %doc LICENSE
 %dir %{_libdir}/ocaml/%{pkgname}
+%{_libdir}/ocaml/%{pkgname}/*.cma
+%{_libdir}/ocaml/%{pkgname}/*.cm[ix]
+%if %{with ocaml_opt}
 %{_libdir}/ocaml/%{pkgname}/*.a
-%{_libdir}/ocaml/%{pkgname}/*.cm[ixa]*
+%{_libdir}/ocaml/%{pkgname}/*.cmxa
+%endif
 %dir %{_libdir}/ocaml/site-lib/%{pkgname}
 %{_libdir}/ocaml/site-lib/%{pkgname}/META
