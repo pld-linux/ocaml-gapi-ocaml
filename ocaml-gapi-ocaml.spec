@@ -11,23 +11,23 @@
 %define		debug_package	%{nil}
 Summary:	Google Data Protocol (GData) client library
 Name:		ocaml-%{pkgname}
-Version:	0.3.3
+Version:	0.3.6
 Release:	1
 License:	MIT
 Group:		Libraries
 Source0:	https://github.com/astrada/gapi-ocaml/archive/v%{version}/%{name}-%{version}.tar.gz
-# Source0-md5:	ad2e8f0df3e31561bf7234c1408e9e22
+# Source0-md5:	b8759b3a9010769db86786141ed374dd
+Patch0:		jbuilder.patch
 URL:		http://gapi-ocaml.forge.ocamlcore.org/
 BuildRequires:	cppo >= 0.9.3
-BuildRequires:	ocaml >= 3.04-7
+BuildRequires:	ocaml >= 4.02.3
 BuildRequires:	ocaml-biniou-devel >= 1.0.6
 BuildRequires:	ocaml-cryptokit-devel >= 1.9
 BuildRequires:	ocaml-curl-devel >= 0.6.0
 BuildRequires:	ocaml-easy-format-devel >= 1.0.1
 BuildRequires:	ocaml-extlib-devel >= 1.5.4
 BuildRequires:	ocaml-findlib >= 1.4
-BuildRequires:	ocaml-net-netstring-devel >= 3.6
-#BuildRequires:	ocaml-net-netstring-devel >= 3.7.3
+BuildRequires:	ocaml-net-netstring-devel >= 4.1.4
 BuildRequires:	ocaml-xmlm-devel >= 1.1.1
 BuildRequires:	ocaml-yojson-devel >= 1.1.6
 %requires_eq	ocaml-runtime
@@ -68,6 +68,7 @@ tej biblioteki.
 
 %prep
 %setup -q -n %{pkgname}-%{version}
+%patch0 -p1 -R
 
 %build
 ocaml setup.ml -configure \
