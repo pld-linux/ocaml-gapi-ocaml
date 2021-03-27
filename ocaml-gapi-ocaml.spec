@@ -12,7 +12,7 @@
 Summary:	Google Data Protocol (GData) client library
 Name:		ocaml-%{pkgname}
 Version:	0.4.1
-Release:	1
+Release:	2
 License:	MIT
 Group:		Libraries
 Source0:	https://github.com/astrada/gapi-ocaml/archive/v%{version}/%{name}-%{version}.tar.gz
@@ -71,14 +71,6 @@ rm -rf $RPM_BUILD_ROOT
 
 dune install --destdir=$RPM_BUILD_ROOT
 
-# move to dir pld ocamlfind looks
-cat <<EOF >> $RPM_BUILD_ROOT%{_libdir}/ocaml/%{pkgname}/META
-directory="+%{pkgname}"
-EOF
-install -d $RPM_BUILD_ROOT%{_libdir}/ocaml/site-lib/%{pkgname}
-ln -sr $RPM_BUILD_ROOT%{_libdir}/ocaml/%{pkgname}/META \
-	$RPM_BUILD_ROOT%{_libdir}/ocaml/site-lib/%{pkgname}
-
 # no standard way of packaging .mli docs in pld. just drop
 %{__rm} $RPM_BUILD_ROOT%{_libdir}/ocaml/%{pkgname}/*.mli
 
@@ -99,5 +91,3 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/ocaml/%{pkgname}/*.a
 %{_libdir}/ocaml/%{pkgname}/*.cmx[as]
 %endif
-%dir %{_libdir}/ocaml/site-lib/%{pkgname}
-%{_libdir}/ocaml/site-lib/%{pkgname}/META
