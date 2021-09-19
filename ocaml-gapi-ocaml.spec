@@ -12,7 +12,7 @@
 Summary:	Google Data Protocol (GData) client library
 Name:		ocaml-%{pkgname}
 Version:	0.4.1
-Release:	2
+Release:	3
 License:	MIT
 Group:		Libraries
 Source0:	https://github.com/astrada/gapi-ocaml/archive/v%{version}/%{name}-%{version}.tar.gz
