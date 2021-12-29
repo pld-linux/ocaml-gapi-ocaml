@@ -10,11 +10,14 @@
 %define		pkgname	gapi-ocaml
 %define		debug_package	%{nil}
 Summary:	Google Data Protocol (GData) client library
+Summary(pl.UTF-8):	Biblioteka kliencka protokołu GData (Google Data Protocol)
 Name:		ocaml-%{pkgname}
 Version:	0.4.1
 Release:	3
 License:	MIT
 Group:		Libraries
+# TODO:
+#Source0:	https://github.com/astrada/gapi-ocaml/archive/v%{version}/%{pkgname}-%{version}.tar.gz
 Source0:	https://github.com/astrada/gapi-ocaml/archive/v%{version}/%{name}-%{version}.tar.gz
 # Source0-md5:	aeecae11fddf4511cea908808c73366a
 URL:		http://gapi-ocaml.forge.ocamlcore.org/
@@ -42,9 +45,9 @@ używających tej biblioteki.
 
 %package devel
 Summary:	Google Data Protocol (GData) client library - development part
-Summary(pl.UTF-8):	Wiązania gapi dla OCamla - cześć programistyczna
+Summary(pl.UTF-8):	Biblioteka kliencka protokołu GData (Google Data Protocol) - cześć programistyczna
 Group:		Development/Libraries
-%requires_eq ocaml
+%requires_eq	ocaml
 Requires:	ocaml-biniou-devel >= 1.0.6
 Requires:	ocaml-cryptokit-devel >= 1.9
 Requires:	ocaml-curl-devel >= 0.6.0
@@ -57,8 +60,8 @@ This package contains files needed to develop OCaml programs using
 this library.
 
 %description devel -l pl.UTF-8
-Pakiet ten zawiera pliki niezbędne do tworzenia programów używających
-tej biblioteki.
+Pakiet ten zawiera pliki niezbędne do tworzenia programów w OCamlu
+używających biblioteki gapi-ocaml.
 
 %prep
 %setup -q -n %{pkgname}-%{version}
