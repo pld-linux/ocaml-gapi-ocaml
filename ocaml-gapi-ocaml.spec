@@ -12,23 +12,23 @@
 Summary:	Google Data Protocol (GData) client library
 Summary(pl.UTF-8):	Biblioteka kliencka protokołu GData (Google Data Protocol)
 Name:		ocaml-%{module}
-Version:	0.4.1
-Release:	4
+Version:	0.4.2
+Release:	1
 License:	MIT
 Group:		Libraries
-# TODO:
-#Source0:	https://github.com/astrada/gapi-ocaml/archive/v%{version}/%{module}-%{version}.tar.gz
-Source0:	https://github.com/astrada/gapi-ocaml/archive/v%{version}/%{name}-%{version}.tar.gz
-# Source0-md5:	aeecae11fddf4511cea908808c73366a
+#Source0Download: https://github.com/astrada/gapi-ocaml/releases
+Source0:	https://github.com/astrada/gapi-ocaml/archive/v%{version}/%{module}-%{version}.tar.gz
+# Source0-md5:	d8f549e73826599a5ae94a3633aa7356
 URL:		http://gapi-ocaml.forge.ocamlcore.org/
 BuildRequires:	cppo >= 0.9.3
 BuildRequires:	ocaml >= 1:4.02.3
 BuildRequires:	ocaml-cryptokit-devel >= 1.9
 BuildRequires:	ocaml-curl-devel >= 0.6.0
 BuildRequires:	ocaml-dune
-BuildRequires:	ocaml-easy-format-devel >= 1.0.1
 BuildRequires:	ocaml-findlib >= 1.4
 BuildRequires:	ocaml-net-netstring-devel >= 4.1.4
+BuildRequires:	ocaml-net-netsys-devel >= 4.1.4
+BuildRequires:	ocaml-xmlm-devel >= 1.0.2
 BuildRequires:	ocaml-yojson-devel >= 1.1.6
 %requires_eq	ocaml-runtime
 Conflicts:	ocaml-gapi-ocaml < 0.4.1-4
@@ -51,8 +51,9 @@ Group:		Development/Libraries
 %requires_eq	ocaml
 Requires:	ocaml-cryptokit-devel >= 1.9
 Requires:	ocaml-curl-devel >= 0.6.0
-Requires:	ocaml-easy-format-devel >= 1.0.1
-Requires:	ocaml-net-netstring-devel >= 3.7.3
+Requires:	ocaml-net-netstring-devel >= 4.1.1
+Requires:	ocaml-net-netsys-devel >= 4.1.4
+Requires:	ocaml-xmlm-devel >= 1.0.2
 Requires:	ocaml-yojson-devel >= 1.1.6
 
 %description devel
