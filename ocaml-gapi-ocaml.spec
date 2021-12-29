@@ -1,36 +1,37 @@
 #
 # Conditional build:
-%bcond_without	ocaml_opt	# skip building native optimized binaries (bytecode is always built)
+%bcond_without	ocaml_opt	# native optimized binaries (bytecode is always built)
 
-# not yet available on x32 (ocaml 4.02.1), remove when upstream will support it
-%ifnarch %{ix86} %{x8664} arm aarch64 ppc sparc sparcv9
+# not yet available on x32 (ocaml 4.02.1), update when upstream will support it
+%ifnarch %{ix86} %{x8664} %{arm} aarch64 ppc sparc sparcv9
 %undefine	with_ocaml_opt
 %endif
 
-%define		pkgname	gapi-ocaml
+%define		module	gapi-ocaml
 %define		debug_package	%{nil}
 Summary:	Google Data Protocol (GData) client library
 Summary(pl.UTF-8):	Biblioteka kliencka protokołu GData (Google Data Protocol)
-Name:		ocaml-%{pkgname}
+Name:		ocaml-%{module}
 Version:	0.4.1
-Release:	3
+Release:	4
 License:	MIT
 Group:		Libraries
 # TODO:
-#Source0:	https://github.com/astrada/gapi-ocaml/archive/v%{version}/%{pkgname}-%{version}.tar.gz
+#Source0:	https://github.com/astrada/gapi-ocaml/archive/v%{version}/%{module}-%{version}.tar.gz
 Source0:	https://github.com/astrada/gapi-ocaml/archive/v%{version}/%{name}-%{version}.tar.gz
 # Source0-md5:	aeecae11fddf4511cea908808c73366a
 URL:		http://gapi-ocaml.forge.ocamlcore.org/
 BuildRequires:	cppo >= 0.9.3
-BuildRequires:	ocaml >= 4.02.3
-BuildRequires:	ocaml-biniou-devel >= 1.0.6
+BuildRequires:	ocaml >= 1:4.02.3
 BuildRequires:	ocaml-cryptokit-devel >= 1.9
 BuildRequires:	ocaml-curl-devel >= 0.6.0
+BuildRequires:	ocaml-dune
 BuildRequires:	ocaml-easy-format-devel >= 1.0.1
 BuildRequires:	ocaml-findlib >= 1.4
 BuildRequires:	ocaml-net-netstring-devel >= 4.1.4
 BuildRequires:	ocaml-yojson-devel >= 1.1.6
 %requires_eq	ocaml-runtime
+Conflicts:	ocaml-gapi-ocaml < 0.4.1-4
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -48,7 +49,6 @@ Summary:	Google Data Protocol (GData) client library - development part
 Summary(pl.UTF-8):	Biblioteka kliencka protokołu GData (Google Data Protocol) - cześć programistyczna
 Group:		Development/Libraries
 %requires_eq	ocaml
-Requires:	ocaml-biniou-devel >= 1.0.6
 Requires:	ocaml-cryptokit-devel >= 1.9
 Requires:	ocaml-curl-devel >= 0.6.0
 Requires:	ocaml-easy-format-devel >= 1.0.1
@@ -64,33 +64,44 @@ Pakiet ten zawiera pliki niezbędne do tworzenia programów w OCamlu
 używających biblioteki gapi-ocaml.
 
 %prep
-%setup -q -n %{pkgname}-%{version}
+%setup -q -n %{module}-%{version}
 
 %build
-dune build
+dune build --verbose
 
 %install
 rm -rf $RPM_BUILD_ROOT
 
 dune install --destdir=$RPM_BUILD_ROOT
 
-# no standard way of packaging .mli docs in pld. just drop
-%{__rm} $RPM_BUILD_ROOT%{_libdir}/ocaml/%{pkgname}/*.mli
+# sources
+%{__rm} $RPM_BUILD_ROOT%{_libdir}/ocaml/%{module}/*.ml
+# packaged as %doc
+%{__rm} -r $RPM_BUILD_ROOT%{_prefix}/doc/%{module}
 
 %clean
 rm -rf $RPM_BUILD_ROOT
 
+%files
+%defattr(644,root,root,755)
+%doc LICENSE README.md
+%dir %{_libdir}/ocaml/gapi-ocaml
+%{_libdir}/ocaml/gapi-ocaml/META
+%{_libdir}/ocaml/gapi-ocaml/*.cma
+%if %{with ocaml_opt}
+%attr(755,root,root) %{_libdir}/ocaml/gapi-ocaml/*.cmxs
+%endif
+
 %files devel
 %defattr(644,root,root,755)
-%doc LICENSE
-%dir %{_libdir}/ocaml/%{pkgname}
-%{_libdir}/ocaml/gapi-ocaml/META
 %{_libdir}/ocaml/gapi-ocaml/dune-package
 %{_libdir}/ocaml/gapi-ocaml/opam
-%{_libdir}/ocaml/%{pkgname}/*.cma
-%{_libdir}/ocaml/%{pkgname}/*.cmt*
-%{_libdir}/ocaml/%{pkgname}/*.cm[ix]
+%{_libdir}/ocaml/gapi-ocaml/*.cmi
+%{_libdir}/ocaml/gapi-ocaml/*.cmt
+%{_libdir}/ocaml/gapi-ocaml/*.cmti
+%{_libdir}/ocaml/gapi-ocaml/*.mli
 %if %{with ocaml_opt}
-%{_libdir}/ocaml/%{pkgname}/*.a
-%{_libdir}/ocaml/%{pkgname}/*.cmx[as]
+%{_libdir}/ocaml/gapi-ocaml/*.a
+%{_libdir}/ocaml/gapi-ocaml/*.cmx
+%{_libdir}/ocaml/gapi-ocaml/*.cmxa
 %endif
