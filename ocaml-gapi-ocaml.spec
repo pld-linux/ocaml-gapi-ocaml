@@ -13,7 +13,7 @@ Summary:	Google Data Protocol (GData) client library
 Summary(pl.UTF-8):	Biblioteka kliencka protokołu GData (Google Data Protocol)
 Name:		ocaml-%{module}
 Version:	0.4.2
-Release:	1
+Release:	2
 License:	MIT
 Group:		Libraries
 #Source0Download: https://github.com/astrada/gapi-ocaml/releases
@@ -48,6 +48,7 @@ używających tej biblioteki.
 Summary:	Google Data Protocol (GData) client library - development part
 Summary(pl.UTF-8):	Biblioteka kliencka protokołu GData (Google Data Protocol) - cześć programistyczna
 Group:		Development/Libraries
+Requires:	%{name} = %{version}-%{release}
 %requires_eq	ocaml
 Requires:	ocaml-cryptokit-devel >= 1.9
 Requires:	ocaml-curl-devel >= 0.6.0
