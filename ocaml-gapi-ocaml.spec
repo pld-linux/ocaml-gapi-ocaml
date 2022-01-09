@@ -46,7 +46,7 @@ używających tej biblioteki.
 
 %package devel
 Summary:	Google Data Protocol (GData) client library - development part
-Summary(pl.UTF-8):	Biblioteka kliencka protokołu GData (Google Data Protocol) - cześć programistyczna
+Summary(pl.UTF-8):	Biblioteka kliencka protokołu GData (Google Data Protocol) - część programistyczna
 Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
 %requires_eq	ocaml
